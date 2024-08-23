@@ -1,4 +1,5 @@
 import { navLinks, navIcons } from "../constants"
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -7,12 +8,12 @@ export default function Footer() {
         <div className="container">
           <ul className="nav justify-content-center border-bottom pb-3 mb-3">
             {navLinks.map((val, index) => (
-              <li key={index} className="nav-item"><a href={val.href} className="nav-link text-light">{val.label}</a></li>     
+              <li key={index} className="nav-item"><Link to={val.href} className="nav-link text-light">{val.label}</Link></li>     
             ))}
           </ul>
           <div className="d-flex justify-content-center mb-3">
             {navIcons.map((val, index) => (
-              <a key={index} href={val.href} title={val.label}><i className={"bi text-light me-3 fs-4 "+(val.class)}></i></a>
+              <a key={index} href={val.href} target="_blank" title={val.label}><i className={"bi text-light me-3 fs-4 "+(val.class)}></i></a>
             ))}
           </div>
           <p className="text-center mb-0"> &copy; 2024 AMNation, Inc. All rights reserved.</p>

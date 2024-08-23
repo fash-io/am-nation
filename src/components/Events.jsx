@@ -1,4 +1,5 @@
 import { events as eventData } from "../constants";
+import { Link } from "react-router-dom";
 import SectionWrapper from "./SectionWrapper";
 eventData.sort((a, b) => b.rating - a.rating);
 // eventData.sort((a, b) => a.name.localeCompare(b.name));
@@ -17,10 +18,12 @@ function AllEvents({ events }) {
                 style={{ height: "280px" }}
               />
               <div className="case-card w-100 h-100 position-absolute d-flex flex-column justify-content-end p-4 rounded-3 text-center top-0 start-0">
-                <h4 className="text-light display-5 fs-2 fw-bold">{val.name.toUpperCase()}</h4>
-                <a href={val.link_name} className="btn btn-outline-light mt-2 mx-auto px-5">
+                <h4 className="text-light display-5 fs-2 fw-bold">
+                  {val.name.toUpperCase()}
+                </h4>
+                <Link to={val.link_name} className="button">
                   View Details
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -59,19 +62,15 @@ export default function Events(props) {
                     <h3 className="text-light display-5 fs-2 fw-bold">
                       {val.name.toUpperCase()}
                     </h3>
-                    <a
-                      href={val.link_name}
-                      className="btn btn-outline-light w-50"
-                    >
+                    <Link to={val.link_name} className="button">
                       Buy Ticket(s)
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
             )
           )}
         </div>
-        
       </SectionWrapper>
     );
   }

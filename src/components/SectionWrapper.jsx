@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export default function SectionWrapper(props) {
   const { id, title, children, more, type, lead } = props;
   return (
@@ -6,7 +7,7 @@ export default function SectionWrapper(props) {
         <div className="container-lg my-5 container-1 container-fluid" id={id}>
         <div className="my-5 d-flex justify-content-between align-items-center">
           <h3 className="fw-bold fs-2 text-lead">{title}</h3>
-          {more && (<a className="nav-link" href={more.url}>{more.name} <i className="bi bi-arrow-right"></i></a>)}
+          {more && (<Link className="nav-link" to={more.url}>{more.name} <i className="bi bi-arrow-right"></i></Link>)}
         </div>
         {children}
       </div>
@@ -17,7 +18,7 @@ export default function SectionWrapper(props) {
               <h2 className="display-4">{title}</h2>
               {lead && <p className="lead">{lead}</p>}
             </div>
-            {more && (<a className="nav-link" href={more.url}>{more.name} <i className="bi bi-arrow-right"></i></a>)}
+            {more && (<Link className="nav-link" to={more.url}>{more.name} <i className="bi bi-arrow-right"></i></Link>)}
           </div>
           {children}
         </div>

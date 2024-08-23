@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 export default function Carousel(props) {
   const { carouselItems, btn } = props
   return (
@@ -6,16 +7,16 @@ export default function Carousel(props) {
     <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-indicators">
         {carouselItems.map((_, index) => (
-          <button key={index} type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to={index} className={index === 0 ? "active" : ""} aria-current={index === 0 ? "true" : "false"} aria-label={`Slide ${index + 1}`} ></button>
+          <button key={index} type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to={index} className={index === 0 && "active"} aria-current={index === 0 ? "true" : "false"} aria-label={`Slide ${index + 1}`} ></button>
         ))}
       </div>
       <div className="carousel-inner">
         {carouselItems.map((item, index) => (
-          <div key={index} className={`carousel-item ${item.isActive ? "active" : ""}`} >
-            <img src={item.imgSrc} className={"d-block w-100 img-fluid object-fit-cover"+(!btn && "f")} alt={item.altText} />
+          <div key={index} className={"carousel-item " + (item.isActive && "active")} >
+            <img src={item.imgSrc} className="d-block w-100 img-fluid object-fit-cover " alt={item.altText} />
             <div className="carousel-caption h-50">
               <h2 className="text-light">{item.caption}</h2>
-              {btn && (<a href="/booking" className="btn btn-light">Book Now</a>)}
+              {btn && (<Link to="/booking" className="btn btn-light">Book Now</Link>)}
             </div>
           </div>
         ))}

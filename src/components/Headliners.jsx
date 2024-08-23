@@ -1,5 +1,6 @@
 import { artists } from "../constants"
 import SectionWrapper from "./SectionWrapper";
+import { Link } from "react-router-dom";
 export default function Headliners() {
   console.log();
   return (
@@ -15,7 +16,7 @@ export default function Headliners() {
               <div className="case-card w-100 h-100 position-absolute d-flex flex-column justify-content-end p-4 rounded-3 text-center top-0 start-0">
                 <h3 className={"display-5 fs-4 text-end " + (val.event ? "text-light" : "text-secondary")}><small>{val.event ? val.event.name.toUpperCase() : "unannounced"}</small></h3>
                 <h3 className="text-light display-5 fs-2 fw-bold">{val.name.toUpperCase()}</h3>
-                <a href={val.event.link_name} className={"btn btn-outline-light w-50 " + (val.event ? "" : "disabled")}>Book Now</a>
+                <Link to={val.event.link_name} className={"button " + (!(val.event) && "disabled")}>Book Now</Link>
               </div>
             </div>
           </div>

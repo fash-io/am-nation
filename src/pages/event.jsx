@@ -2,8 +2,12 @@ import { useLocation } from "react-router-dom";
 import { events, artists } from "../constants";
 import SectionWrapper from "../components/SectionWrapper";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Event() {
+
+
+
   const eventName = useLocation();
   const event = events.find((e) => e.link_name === eventName.pathname);
 
@@ -16,7 +20,7 @@ export default function Event() {
       const newCount = increase ? currentCount + 1 : Math.max(currentCount - 1, 0);
 
       setTotalPrice((prevTotalPrice) => {
-        return increase ? prevTotalPrice + ticketPrice : Math.max(prevTotalPrice - ticketPrice, 0);
+        return increase ? prevTotalPrice + (ticketPrice/2) : Math.max(prevTotalPrice - (ticketPrice/2), 0);
       });
 
       return { ...prevCounts, [index]: newCount };
@@ -198,7 +202,7 @@ export default function Event() {
       </SectionWrapper>
 
       {/* Other Shows Section */}
-      <SectionWrapper id="case-stud" title="Other Shows" more={{ name: "View All Events", url: "./events.html" }} type="1">
+      <SectionWrapper id="case-stud" title="Other Shows" more={{ name: "View All Events", url: "/events" }} type="1">
         <div className="row case-row my-4 gy-5 gy-lg-0">
           {events
             .filter((event_) => event_.name !== event.name)
@@ -213,7 +217,7 @@ export default function Event() {
                   />
                   <div className="case-card w-100 h-100 position-absolute d-flex flex-column justify-content-end p-4 rounded-3 text-center top-0 start-0">
                     <h3 className="text-light display-5 fs-2 fw-bold">{event_.name.toUpperCase()}</h3>
-                    <a href={event_.link_name} className="btn btn-outline-light w-50">Buy Ticket(s)</a>
+                    <Link to={event_.link_name} className="button">Buy Ticket(s)</Link>
                   </div>
                 </div>
               </div>

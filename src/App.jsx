@@ -7,27 +7,42 @@ import Booking from "./pages/booking";
 import Footer from "./sections/Footer";
 import Newsletter from "./sections/Newsletter";
 import { events } from "./constants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
-  let mode = localStorage.getItem("darkMode") || true;
+  const mode = JSON.parse(localStorage.getItem("darkMode")) || true; // Ensure mode is parsed correctly
   const [darkMode, setDarkMode] = useState(mode);
-  if (darkMode) {
-    document.getElementsByTagName("html")[0].setAttribute("data-bs-theme", "dark");
-    document.querySelector(":root").style.setProperty("--white", "255, 255, 255");
-    document.querySelector(":root").style.setProperty("--black", "0, 0, 0");
-  } else {
-    document.getElementsByTagName("html")[0].setAttribute("data-bs-theme", "light");
-    document.querySelector(":root").style.setProperty("--white", "0, 0, 0");
-    document.querySelector(":root").style.setProperty("--black", "255, 255, 255");
-  }
+
+  useEffect(() => {
+    if (darkMode) {
+      document
+        .getElementsByTagName("html")[0]
+        .setAttribute("data-bs-theme", "dark");
+      document
+        .querySelector(":root")
+        .style.setProperty("--white", "255, 255, 255");
+      document.querySelector(":root").style.setProperty("--black", "0, 0, 0");
+    } else {
+      document
+        .getElementsByTagName("html")[0]
+        .setAttribute("data-bs-theme", "light");
+      document.querySelector(":root").style.setProperty("--white", "0, 0, 0");
+      document
+        .querySelector(":root")
+        .style.setProperty("--black", "255, 255, 255");
+    }
+  }, [darkMode]);
+
   const handleSetDarkMode = () => {
-    setDarkMode (!darkMode)
-    localStorage.setItem("darkMode", !darkMode)
-  }
+    setDarkMode(!darkMode);
+    localStorage.setItem("darkMode", JSON.stringify(!darkMode));
+  };
+
   return (
     <Router>
-      <Navbar handleSetDarkMode={handleSetDarkMode} darkMode={darkMode}/>
+      <ScrollToTop />
+      <Navbar handleSetDarkMode={handleSetDarkMode} darkMode={darkMode} />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/events" element={<Events />} />
@@ -36,7 +51,7 @@ function App() {
           <Route key={index} path={val.link_name} element={<Event />} />
         ))}
       </Routes>
-      <Newsletter/>
+      <Newsletter />
       <Footer />
     </Router>
   );

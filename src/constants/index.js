@@ -1,8 +1,6 @@
 export const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/#about", label: "About" },
   { href: "/events", label: "Events" },
-  { href: "/#Reviews", label: "Reviews" },
   { href: "/booking", label: "Book Now" },
   { copwri: " &copy; 2024 AMNation, Inc. All rights reserved." },
 ];

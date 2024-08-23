@@ -186,8 +186,8 @@ export default function booking() {
                     </label>
                   </div>
                 </div>
-                <div className="button d-flex justify-content-end mt-5">
-                  <button type="submit" className="btn btn-warning px-4">
+                <div className="d-flex justify-content-end mt-5">
+                  <button type="submit" className="btn btn-outline-primary px-4">
                     {" "}
                     Submit Booking{" "}
                   </button>
