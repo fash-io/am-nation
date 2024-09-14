@@ -3,7 +3,6 @@ import {
   Home,
   Events,
   Event,
-  Booking,
   Artists,
   Error,
   AboutUs,
@@ -11,6 +10,7 @@ import {
   AddEvent,
   ViewEvents,
 } from "./pages";
+import Booking from "./pages/Booking";
 import { useState, useEffect } from "react";
 import MainLayout from "./utils/MainLayout";
 import { onAuthStateChanged } from "firebase/auth";
