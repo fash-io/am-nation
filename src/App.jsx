@@ -22,7 +22,7 @@ function App() {
   const initialMode = JSON.parse(localStorage.getItem("darkMode")) || false;
   const [darkMode, setDarkMode] = useState(initialMode);
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);  // For showing loading spinner
+  const [loading, setLoading] = useState(true); // For showing loading spinner
   const [error, setError] = useState(null);
   const [level, setLevel] = useState(null);
 
@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user_) => {
       setUser(user_ || null);
-      setLoading(false);  // Stop loading once user state is determined
+      setLoading(false); // Stop loading once user state is determined
     });
 
     return () => unsubscribe();
@@ -88,7 +88,7 @@ function App() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;  // Display a loading spinner or screen
+    return <div>Loading...</div>; // Display a loading spinner or screen
   }
 
   if (error) {
@@ -98,30 +98,52 @@ function App() {
   return (
     <Router>
       <Routes>
-      {level === 1 && (
-        <Route 
-          path="/" 
-          element={<MainLayout darkMode={darkMode} handleSetDarkMode={handleSetDarkMode} isLogined={user} />}
-        >
-          <Route index element={<Home />} />
-          <Route path="events" element={<Events />} />
-          <Route path="artists" element={<Artists />} />
-          <Route path="booking" element={<Booking />} />
-          <Route path="about" element={<AboutUs />} />
-          <Route path="event/:id" element={<Event />} />
-        </Route>
-      )}
+        {level === 1 && (
+          <Route
+            path="/"
+            element={
+              <MainLayout
+                darkMode={darkMode}
+                handleSetDarkMode={handleSetDarkMode}
+                isLogined={user}
+              />
+            }
+          >
+            <Route index element={<Home />} />
+            <Route path="events" element={<Events />} />
+            <Route path="artists" element={<Artists />} />
+            <Route path="booking" element={<Booking />} />
+            <Route path="about" element={<AboutUs />} />
+            <Route path="event/:id" element={<Event />} />
+          </Route>
+        )}
         {level === 2 && (
           <Route path="/">
-            <Route index element={<ViewEvents user={user}/>} />
+            <Route index element={<ViewEvents user={user} />} />
             <Route path="/addEvent" element={<AddEvent user={user} />} />
             <Route path="/event/:id" element={<EditEventPage />} />
           </Route>
         )}
 
-        <Route path="/login" element={<Login darkMode={darkMode} handleSetDarkMode={handleSetDarkMode} />} />
-        <Route path="/signUp" element={<Login darkMode={darkMode} handleSetDarkMode={handleSetDarkMode} />} />
-        
+        <Route
+          path="/"
+          element={
+            <Login darkMode={darkMode} handleSetDarkMode={handleSetDarkMode} />
+          }
+        />
+        <Route
+          path="/signUp"
+          element={
+            <Login darkMode={darkMode} handleSetDarkMode={handleSetDarkMode} />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <Login darkMode={darkMode} handleSetDarkMode={handleSetDarkMode} />
+          }
+        />
+
         {/* Catch-all route for 404 errors */}
         <Route path="*" element={<Error />} />
       </Routes>
