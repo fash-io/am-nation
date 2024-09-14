@@ -22,23 +22,21 @@ function App() {
   const [darkMode, setDarkMode] = useState(initialMode);
 
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);  // For showing loading spinner
+  const [error, setError] = useState(null);
   const [level, setLevel] = useState(null);
 
+  // Monitor authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user_) => {
-      if (user_) {
-        setUser(user_);
-      } else {
-        setUser(null);
-      }
-      setLoading(false);
+      setUser(user_ || null);
+      setLoading(false);  // Stop loading once user state is determined
     });
 
     return () => unsubscribe();
   }, []);
 
+  // Fetch user authorization level
   useEffect(() => {
     if (user) {
       const getUserAuthorization = async () => {
@@ -47,12 +45,11 @@ function App() {
           const userDocSnap = await getDoc(userDocRef);
           if (!userDocSnap.exists()) {
             setError("User document not found.");
-            setLoading(false);
-            return;
           } else {
             setLevel(userDocSnap.data().type);
           }
         } catch (err) {
+          setError("Failed to fetch user data.");
           console.log(err);
         }
       };
@@ -60,30 +57,14 @@ function App() {
     }
   }, [user]);
 
-  console.log(level);
-
-  console.log(user);
+  // Handle dark mode toggling
   useEffect(() => {
     if (darkMode) {
-      document
-        .getElementsByTagName("html")[0]
-        .setAttribute("data-bs-theme", "dark");
-      document
-        .querySelector(":root")
-        .style.setProperty("--white", "249, 250, 251");
-      document.querySelector(":root").style.setProperty("--black", "11,18, 28");
+      document.documentElement.setAttribute("data-bs-theme", "dark");
       document.documentElement.classList.add("dark");
     } else {
+      document.documentElement.setAttribute("data-bs-theme", "light");
       document.documentElement.classList.remove("dark");
-      document
-        .getElementsByTagName("html")[0]
-        .setAttribute("data-bs-theme", "light");
-      document
-        .querySelector(":root")
-        .style.setProperty("--white", "11, 18, 28");
-      document
-        .querySelector(":root")
-        .style.setProperty("--black", "249, 250, 251");
     }
   }, [darkMode]);
 
@@ -92,132 +73,57 @@ function App() {
     localStorage.setItem("darkMode", JSON.stringify(!darkMode));
   };
 
-  if (level === 1) {
-    return (
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <MainLayout
-                darkMode={darkMode}
-                handleSetDarkMode={handleSetDarkMode}
-                user={user}
-              >
-                <Home />
-              </MainLayout>
-            }
-          />
-          <Route
-            path="/events"
-            element={
-              <MainLayout
-                darkMode={darkMode}
-                handleSetDarkMode={handleSetDarkMode}
-                user={user}
-              >
-                <Events />
-              </MainLayout>
-            }
-          />
-          <Route
-            path="/artists"
-            element={
-              <MainLayout
-                darkMode={darkMode}
-                handleSetDarkMode={handleSetDarkMode}
-                user={user}
-              >
-                <Artists />
-              </MainLayout>
-            }
-          />
-          <Route
-            path="/booking"
-            element={
-              <MainLayout
-                darkMode={darkMode}
-                handleSetDarkMode={handleSetDarkMode}
-                user={user}
-              >
-                <Booking />
-              </MainLayout>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <MainLayout
-                darkMode={darkMode}
-                handleSetDarkMode={handleSetDarkMode}
-                user={user}
-              >
-                <AboutUs />
-              </MainLayout>
-            }
-          />
-          <Route
-            path="/event/:id"
-            element={
-              <MainLayout
-                darkMode={darkMode}
-                handleSetDarkMode={handleSetDarkMode}
-                user={user}
-              >
-                <Event />
-              </MainLayout>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <Login
-                darkMode={darkMode}
-                handleSetDarkMode={handleSetDarkMode}
-              />
-            }
-          />
-          <Route
-            path="/signUp"
-            element={
-              <Login
-                darkMode={darkMode}
-                handleSetDarkMode={handleSetDarkMode}
-              />
-            }
-          />
-          <Route path="*" element={<Error darkMode={darkMode} />} />
-        </Routes>
-      </Router>
-    );
-  } else if (level === 2) {
-    return (
-      <>
-        <Navbar />
-        <Router>
-          <Routes>
-            <Route path="*" element={<Error darkMode={darkMode} />} />
-            <Route
-            exact
-            path="/"
-            element={
-              <MainLayout
-                darkMode={darkMode}
-                handleSetDarkMode={handleSetDarkMode}
-                user={user}
-              >
-                <Home />
-              </MainLayout>
-            }
-          />
-            <Route path="/addEvent" element={<AddEvent user={user} />} />
-          </Routes>
-        </Router>
-        <Footer />
-      </>
-    );
+  if (loading) {
+    return <div>Loading...</div>;  // Display a loading spinner or screen
   }
+
+  if (error) {
+    return <Error message={error} />;
+  }
+
+  return (
+    <Router>
+      <Routes>
+        {level === 1 && (
+          <Route
+            path="/"
+            element={
+              <MainLayout darkMode={darkMode} handleSetDarkMode={handleSetDarkMode} user={user}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/events" element={<Events />} />
+                  <Route path="/artists" element={<Artists />} />
+                  <Route path="/booking" element={<Booking />} />
+                  <Route path="/about" element={<AboutUs />} />
+                  <Route path="/event/:id" element={<Event />} />
+                  <Route path="*" element={<Error />} />
+                </Routes>
+              </MainLayout>
+            }
+          />
+        )}
+
+        {level === 2 && (
+          <Route
+            path="*"
+            element={
+              <>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/addEvent" element={<AddEvent user={user} />} />
+                  <Route path="*" element={<Error />} />
+                </Routes>
+                <Footer /> {/* Footer should be placed outside of Routes */}
+              </>
+            }
+          />
+        )}
+
+        <Route path="/login" element={<Login darkMode={darkMode} handleSetDarkMode={handleSetDarkMode} />} />
+        <Route path="/signUp" element={<Login darkMode={darkMode} handleSetDarkMode={handleSetDarkMode} />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
