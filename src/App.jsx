@@ -110,11 +110,11 @@ function App() {
             }
           >
             <Route index element={<Home />} />
-            <Route path="events" element={<Events />} />
-            <Route path="artists" element={<Artists />} />
-            <Route path="booking" element={<Booking />} />
-            <Route path="about" element={<AboutUs />} />
-            <Route path="event/:id" element={<Event />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/artists" element={<Artists />} />
+            <Route path="/booking" element={<Booking />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/event/:id" element={<Event />} />
           </Route>
         )}
         {level === 2 && (
