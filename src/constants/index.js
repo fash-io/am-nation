@@ -1,8 +1,9 @@
 export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/events", label: "Events" },
+  { href: "/artists", label: "Artists" },
+  { href: "/about", label: "About US" },
   { href: "/booking", label: "Book Now" },
-  { copwri: " &copy; 2024 AMNation, Inc. All rights reserved." },
 ];
 export const navIcons = [
   { class: "bi-twitter", label: "twitter", href: "#" },
@@ -53,21 +54,21 @@ export const carouselItems = [
 export const events = [
   {
     id: "afronation",
-    name: "afroNation",
+    name: "AfroNation",
     organizers: "AfroNation x Global Beats.",
     date: "August 17, 2024 22:00:00",
     hero_img: "/img/SHOTLIST_JAKEMULKA_JMULKA_SUNDAY__6390.jpg",
     top_img: "/img/Shotlista_ciggsFANS.jpg3.jpg",
-    main_img: "/img/Lineup013.png",
-    location: "Bedrock's Douglass Site, Detroit, Michigan",
+    main_img: "/img/Lineup013 (1).png",
     imgSrc: "/img/Lineup013.png",
     altText: "AFRONATION",
+    location: "Bedrock's Douglass Site, Detroit, Michigan",
     rating: 5,
     curr: '₦',
+    isActive: false,
     get link_name() {
       return `/event/${this.id}`;
     },
-    isActive: false,
     tickets: [
       {
         name: "General Admission2",
@@ -102,15 +103,15 @@ export const events = [
     imgSrc: "/img/SHOTLIST_JAKEMULKA_JMULKA_SUNDAY__6390.jpg",
     main_img: "/img/Shotlista_ciggsFANS.jpg3.jpg",
     top_img: "/img/Lineup013.png",
-    location: "Bedrock's Douglass Site, Detroit, Michigan2",
     hero_img: "/img/Lineup013.png",
     altText: "AFRONATION",
+    location: "Bedrock's Douglass Site, Detroit, Michigan2",
     rating: 3,
     curr: '₦',
+    isActive: false,
     get link_name() {
       return `/event/${this.id}`;
     },
-    isActive: false,
     tickets: [
       {
         name: "General Admission2",
@@ -145,12 +146,12 @@ export const events = [
     hero_img: "/img/circus maximus.png",
     top_img: "/img/circus maximus.png",
     main_img: "/img/utopia.jpg",
-    location: "ESTADIO BICENTENARIO LA FLORIDA SANTIAGO, CHILE",
     imgSrc: "/img/circus maximus.png",
     altText: "Circus MAximus",
-    isActive: true,
+    location: "ESTADIO BICENTENARIO LA FLORIDA SANTIAGO, CHILE",
     rating: 5,
     curr: '$',
+    isActive: true,
     get link_name() {
       return `/event/${this.id}`;
     },
@@ -178,20 +179,25 @@ export const events = [
     ],
     artistId: [2],
   },
+  
   {
-    id: "circusMaximus2",
-    name: "CIRCUS MAXIMUS 2024 (Main Event)2",
+    id: "circusMaximus9",
+    name: "CIRCUS MAXIMUS 2024 (Main Event)20",
     organizers: "Travis Scott x Tenpo2.",
-    date: "September 7, 2024 22:00:00",
+    date: "September 23, 2024 22:00:00",
+    category: "",
+    tickets_number: 100,
+    available_tks: 49,
     hero_img: "/img/utopia.jpg",
     top_img: "/img/utopia.jpg",
     main_img: "/img/circus maximus.png",
-    location: "ESTADIO BICENTENARIO LA FLORIDA SANTIAGO, CHILE2",
     imgSrc: "/img/utopia.jpg",
     altText: "Circus MAximus2",
-    isActive: true,
+    location: "ESTADIO BICENTENARIO LA FLOIDA SANTIAGO, CHILE2",
+    location_: "us",
     rating: 2,
     curr: '$',
+    isActive: false,
     get link_name() {
       return `/event/${this.id}`;
     },
@@ -217,7 +223,7 @@ export const events = [
         price_string: "$100,000.00",
       },
     ],
-    artistId: [6, 7,4,9,1],
+    artistId: [5,1,2,8],
   },
   
 ];
@@ -230,6 +236,7 @@ export const artists = [
     event: false,
     headline: true,
     featured: false,
+    relevance: 10,
   },
   {
     id: 2,
@@ -238,6 +245,8 @@ export const artists = [
     event: events[2],
     headline: true,
     featured: false,
+    relevance: 11,
+
   },
   {
     id: 3,
@@ -246,6 +255,8 @@ export const artists = [
     event: events[0],
     headline: true,
     featured: true,
+    relevance: 12,
+
   },
   {
     id: 4,
@@ -254,14 +265,17 @@ export const artists = [
     event: events[0],
     headline: true,
     featured: true,
+    relevance: 8,
   },
   {
     id: 5,
     name: "Wizkid",
-    img_url: "./img/wiz.jpg",
+    img_url: "/img/wiz.jpg",
     event: false,
     headline: true,
     featured: false,
+    relevance: 9,
+
   },
   {
     id: 6,
@@ -270,6 +284,8 @@ export const artists = [
     event: events[0],
     headline: true,
     featured: false,
+    relevance: 10,
+
   },
   {
     id: 7,
@@ -278,6 +294,8 @@ export const artists = [
     event: false,
     headline: false,
     featured: true,
+    relevance: 3,
+
   },
   {
     id: 8,
@@ -286,6 +304,8 @@ export const artists = [
     event: false,
     headline: false,
     featured: true,
+    relevance: 7,
+
   },
   {
     id: 9,
@@ -294,6 +314,7 @@ export const artists = [
     event: false,
     headline: false,
     featured: true,
+    relevance: 6,
   },
   {
     id: 10,
@@ -302,6 +323,7 @@ export const artists = [
     event: false,
     headline: false,
     featured: true,
+    relevance: 7,
   },
 ];
 
@@ -309,6 +331,7 @@ export const reviews = [
   {
     name: "John D",
     reviewTitle: "Amazing Atmosphere!",
+    stars: 4,
     img_url: "/img/pic-5.png",
     review:
       "he concert was electric! The atmosphere was incredible, and the music was out of this world. Can't wait for the next one!",
@@ -316,6 +339,7 @@ export const reviews = [
   {
     name: "Sarah K",
     reviewTitle: "Unforgettable Night",
+    stars: 5,
     img_url: "/img/pic-6.png",
     review:
       "An unforgettable night of music and fun. Everything was perfectly organized, and the artists were phenomenal. Highly recommend!",
@@ -323,6 +347,7 @@ export const reviews = [
   {
     name: "Emily R",
     reviewTitle: "Best Concert Ever",
+    stars: 4.5,
     img_url: "/img/pic-4.png",
     review:
       "This was hands down the best concert I've ever been to. The energy, the crowd, the performances – just wow!",
@@ -335,3 +360,15 @@ export const jumbo = {
   jumboTitle: "Welcome to Your Next Great Adventure",
   jumboBtn: "BOOK NOW",
 };
+
+export let users = [
+  { email: 'favourfasi46@gmail.com', password: 'Favfasip1@', uName: 'Fash', },
+  { email: 'david@gmail.com', password: 'Favfasip1@', uName: 'Dave' },
+];
+export let show_org = [
+  {email: "", password: "", acc_details: "", event_created: [],}
+]
+
+let org_uid = "........./21";
+let atd_uid = "........./11";
+let adm_uid = "........./01";

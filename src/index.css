@@ -1,36 +1,26 @@
-:root{ --white : 0, 0, 0; --black : 255, 255, 255;}
-body{background-color: rgba(var(--black), 0.5); transition: all 50ms ease-in;}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{ --white : 17, 24, 39; --black : 249, 250, 251;}
+html{overflow-x: hidden !important;}
+body{background-color: rgba(var(--black)); transition: all 50ms ease-in; text-decoration: none; overflow-x: hidden !important;} 
 .container-1{margin-top: 10rem !important;}
 .hero{margin-top: 6rem !important;}
 .navbar{
   background-color: rgb(var(--black), 0.7);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
-  overflow: hidden;
   box-shadow: 2px 0 5px brown, 8px 0 10px rgb(var(--white));
-}
-#darkMode{
-  bottom: 35%;right: 5%;
-  background: transparent;
-  border: none;
-  border-radius: 50%;
-  box-shadow: 0 0 45px rgba(var(--white), 1);
-  transition: all 200ms ease-out;
-}
-#darkMode:hover{
-  box-shadow: 0 0 15px rgba(var(--white), 1);
-}
+} 
 @media screen and (max-width :991px) {#darkMode{top: 72.5%;}body{overflow-x: hidden;}}
 .carousel-caption h2{text-shadow: 0 0 7px black;}
 .cases-1 {max-height: 280px !important;}
 .cases img {transition: transform 300ms ease;}
-.cases:hover{box-shadow: 2px 3px 9px rgba(var(--white), 0.6);}
 .cases:hover img {transform: scale(1.1)}
 .carousel-item img {
   height: 87vh;
 }
 .case-card {
-  background-color: rgba(0, 0, 0, 0.34);
+  background-color: rgba(0, 0, 0, .3);
   transition: background-color 250ms ease;
 }
 .cases:hover .case-card{
@@ -50,9 +40,11 @@ body{background-color: rgba(var(--black), 0.5); transition: all 50ms ease-in;}
 }
 .button:hover{
   box-shadow: 8px 8px 3px white, -8px -8px 10px brown;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-radius: 3px;
   transform: translate(-5px, -5px);
+  color: #fff;
 }
 .button.disabled{
   cursor: not-allowed;
@@ -81,13 +73,25 @@ body{background-color: rgba(var(--black), 0.5); transition: all 50ms ease-in;}
   transition: background-color 300ms ease;
 }
 #headliners .card-footer:hover {background: rgba(var(--white), 0.2);}
-#reviews img{
+#Reviews img{
   width: 35%;
   min-height: 130px !important;
   transition: transform 200ms linear;
   transform: translateY(20px);
 }
-#reviews .card-body:hover img{transform: translateY(10px);}
+#Reviews .card, .about-card{
+  background: transparent;
+  box-shadow: 0 0 13px rgba(var(--white), 0.17);
+  transition: all 200ms ease-out;
+}
+.about2-card{
+  box-shadow: 0 0 13px rgba(var(--white), 0.17);
+}
+#Reviews .card:hover, .about-card:hover{
+  background: rgba(var(--white), 0.01);
+  box-shadow: 0 0 20px rgba(var(--white), 0.30);
+}
+#Reviews .card:hover img{transform: translateY(0px);}
 .jumbo{
   height: 100vh;
   background-image: url(img/other-concerts-tickets.avif);
@@ -111,23 +115,47 @@ body{background-color: rgba(var(--black), 0.5); transition: all 50ms ease-in;}
 #about, #booking{margin-bottom: 15rem !important;}
 span.border:hover{background-color: rgb(var(--white)); color: var(--black);}
 span.border{transition: background-color 250ms linear; cursor: pointer;}
-.sticky{position: sticky;top: 6rem;}
+.sticky-1{position: sticky !important;top: 6rem !important;}
 .hero1 img{width: 100%;height: 90vh;object-fit: cover;}
-.img-container span{
-  bottom: 400px;
-  right: 500px;
-  font-size: 50px;
-  font-family: "Edu AU VIC WA NT Hand", cursive;
-  font-optical-sizing: auto;
-  font-weight: 900;
-  font-style: normal;
-}
-.shows-container h1, .shows-container span {
-  font-family: "Playfair Display", serif;
-  font-optical-sizing: auto;
-}
-.shows-container img{ height: 330px;}
 img.h{min-height: 250px !important;}
 img.g{min-height: 350px !important;}
 .carousel-item img.f {height: 75vh !important;}
 img.m{height: 585px !important; object-fit: cover;}
+img{
+  background: #fff;
+}
+a{
+  text-decoration: none !important;
+}
+.hover-link {
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+.hover-link:hover {
+  color: #f8f9fa !important;
+  text-decoration: underline !important;
+}
+.hover-icon {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.hover-icon:hover {
+  color: #f8f9fa !important;
+  transform: scale(1.1);
+}
+footer {
+  background-color: #212529;
+}
+footer h5 {
+  color: #ffffff;
+}
+footer p {
+  color: #dcdcdc !important;
+}
+footer a {
+  color: #ffffff !important;
+}
+footer a:hover {
+  color: #f8f9fa !important;
+}
+hr.border-light {
+  border-color: #343a40;
+}

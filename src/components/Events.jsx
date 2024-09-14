@@ -9,8 +9,8 @@ function AllEvents({ events }) {
     <SectionWrapper id="all-events" title="All Events" type="1">
       <div className="row case-row my-4 gy-4">
         {events.map((val, index) => (
-          <div key={index} className="col-lg-6 position-relative cases-1">
-            <div className="cases position-relative rounded-4 overflow-hidden w-100 h-100 h">
+          <div key={index} className="col-lg-6 position-relative cases-1 ">
+            <div className="cases position-relative rounded-4 overflow-hidden w-100 h-100 h about-card">
               <img
                 src={val.hero_img}
                 className="d-block w-100 img-fluid object-fit-cover h-100"

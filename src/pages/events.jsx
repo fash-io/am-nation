@@ -1,9 +1,7 @@
-import Events from '../components/Events'
+import {Events} from '../components'
 
 export default function events() {
   return (
-    <div>
-      <Events full={true}/>
-    </div>
+    <Events full={true}/>
   )
 }

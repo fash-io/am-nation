@@ -15,8 +15,8 @@ export default function Carousel(props) {
           <div key={index} className={"carousel-item " + (item.isActive && "active")} >
             <img src={item.imgSrc} className="d-block w-100 img-fluid object-fit-cover " alt={item.altText} />
             <div className="carousel-caption h-50">
-              <h2 className="text-light">{item.caption}</h2>
-              {btn && (<Link to="/booking" className="btn btn-light">Book Now</Link>)}
+              <h2 className="text-white text-3xl">{item.caption}</h2>
+              {btn && (<Link to="/booking" className="btn btn-light my-3">Book Now</Link>)}
             </div>
           </div>
         ))}
