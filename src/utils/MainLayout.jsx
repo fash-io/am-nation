@@ -1,10 +1,10 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom"; // Import Outlet
 
 export default function MainLayout(props) {
-  const { children, darkMode, handleSetDarkMode, isLogined } = props;
-  
+  const { darkMode, handleSetDarkMode, isLogined } = props;
+
   return (
     <>
       <Navbar
@@ -12,7 +12,9 @@ export default function MainLayout(props) {
         darkMode={darkMode}
         isLogined={isLogined}
       />
-      {children}
+      <main>
+        <Outlet darkMode={darkMode}/> {/* This will render nested routes */}
+      </main>
       <Footer />
     </>
   );

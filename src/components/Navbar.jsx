@@ -10,7 +10,7 @@ export default function Navbar(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(true);
   const navRef = useRef(null);
-  const user = JSON.parse(localStorage.getItem("user"));
+  // const user = JSON.parse(localStorage.getItem("user"));
   // const user = isLogined
   // ? users.find(
   // (user) => user.email === user_.email && user.password === user_.password
@@ -118,7 +118,7 @@ export default function Navbar(props) {
           ))}
           <div className="flex flex-col items-center p-4 space-y-2">
             {isLogined ? (
-              <>Hi, {user.uName}</>
+              <>Hi, {isLogined.uid}</>
             ) : (
               <div className="flex flex-col items-center space-y-2 w-100">
                 <Link

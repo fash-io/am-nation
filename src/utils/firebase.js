@@ -5,6 +5,8 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   signOut,
+  setPersistence,
+  browserLocalPersistence
 } from "firebase/auth";
 import {
   addDoc,
@@ -13,10 +15,14 @@ import {
   getDoc,
   getFirestore,
   setDoc,
+  getDocs, 
+  where, 
+  query,
+  updateDoc
 } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
-import { setPersistence, browserLocalPersistence } from "firebase/auth";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+// Your Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBgcBn5hKY81IoeFsO5id5Cedy_n_TthSY",
   authDomain: "am-nation.firebaseapp.com",
@@ -33,16 +39,13 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+// Functions
 const signup = async (name, email, password, type) => {
   try {
-    const response = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    const response = await createUserWithEmailAndPassword(auth, email, password);
     const user = response.user;
-    const userDOcRef = doc(db, "users", user.uid);
-    await setDoc(userDOcRef, {
+    const userDocRef = doc(db, "users", user.uid);
+    await setDoc(userDocRef, {
       uid: user.uid,
       type: type,
       name,
@@ -71,7 +74,6 @@ const login = async (email, password) => {
     await setPersistence(auth, browserLocalPersistence);
     const response = await signInWithEmailAndPassword(auth, email, password);
     const user = response.user;
-
     const userDocRef = doc(db, "users", user.uid);
     const userDocSnap = await getDoc(userDocRef);
 
@@ -81,10 +83,10 @@ const login = async (email, password) => {
 
       if (userType === "1") {
         console.log("Access granted for user type 1");
-        window.location = "/type1-dashboard";
+        window.location = "/";
       } else if (userType === "2") {
         console.log("Access granted for user type 2");
-        window.location = "/type2-dashboard";
+        window.location = "/";
       } else {
         throw new Error("Invalid user type");
       }
@@ -109,29 +111,101 @@ const logout = async () => {
 const handleAddEvents = async (event) => {
   try {
     const eventsCollectionRef = collection(db, "events");
-      await addDoc(eventsCollectionRef, {
-        // id: event.aid,
-        name: event.name,
-        organizers: event.organizers,
-        date: event.date,
-        hero_img: event.hero_img,
-        // top_img: event.top_img,
-        // main_img: event.main_img,
-        // imgSrc: event.imgSrc,
-        // altText: event.altText,
-        location: event.location_name,
-        country: event.country,
-        // rating: event.rating,
-        curr: event.curr,
-        // isActive: event.isActive,
-        link_name: event.out_link,
-        // tickets: event.tickets,
-        artistId: event.artists_id,
-        organizersId: event.organizerId,
-      });
+    await addDoc(eventsCollectionRef, {
+      name: event.name,
+      organizers: event.organizers,
+      date: event.date,
+      hero_img: event.hero_img,
+      top_img: event.top_img,
+      main_img: event.main_img,
+      location: event.location_name,
+      country: event.country,
+      curr: event.curr,
+      link_name: event.out_link,
+      artistId: event.artists_id,
+      organizersId: event.organizerId,
+    });
     console.log("Success");
   } catch (err) {
     console.error(err);
   }
 };
-export { auth, db, storage, signup, login, logout, handleAddEvents };
+
+const uploadImage = async (file) => {
+  if (!file) return "";
+
+  const storageRef = ref(storage, `images/${file.name}`);
+  try {
+    await uploadBytes(storageRef, file);
+    const url = await getDownloadURL(storageRef);
+    return url;
+  } catch (err) {
+    console.error("Error uploading image: ", err);
+    throw new Error("Failed to upload image.");
+  }
+};
+
+const getEventsByOrganizer = async (organizerId) => {
+  try {
+    console.log("Querying with organizerId:", organizerId); // Log organizerId
+    const eventsRef = collection(db, "events");
+    const q = query(eventsRef, where("organizersId", "==", organizerId));
+    const querySnapshot = await getDocs(q);
+    
+    if (querySnapshot.empty) {
+      console.log("No matching documents.");
+      return [];
+    }
+
+    const events = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    
+    console.log("Events found:", events);
+    return events;
+  } catch (err) {
+    console.error("Error fetching events: ", err);
+    return [];
+  }
+};
+
+// Function to fetch an event by ID
+export const getEventById = async (eventId) => {
+  try {
+    const eventRef = doc(db, 'events', eventId); // Reference to the event document
+    const docSnap = await getDoc(eventRef); // Fetch the document
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() }; // Return event data including the ID
+    } else {
+      throw new Error("No such event!");
+    }
+  } catch (error) {
+    console.error("Error fetching event:", error);
+    throw error;
+  }
+};
+
+// Function to update an event
+export const updateEvent = async (eventId, updatedData) => {
+  try {
+    const eventRef = doc(db, 'events', eventId); // Reference to the event document
+    await updateDoc(eventRef, updatedData); // Update the document with new data
+  } catch (error) {
+    console.error("Error updating event:", error);
+    throw error;
+  }
+};
+
+const changeUserAuthorization = async (user) => {
+  try {
+    const userDocRef = doc(db, "users", user.uid);
+    await updateDoc(userDocRef, { type: 1 });
+  } catch (error) {
+    console.error("Error changing user authorization:", error);
+    throw error;
+  }
+};
+
+// Export all functions and objects
+export { auth, db, storage, signup, login, logout, handleAddEvents, uploadImage, getEventsByOrganizer, changeUserAuthorization };

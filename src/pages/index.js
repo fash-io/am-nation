@@ -7,5 +7,5 @@ export { default as Events } from "./Events";
 export { default as Login } from "./Login";
 export { default as Artists } from "./Artists";
 export { default as AddEvent } from "./AddEvent";
-
+export { default as ViewEvents } from "./ViewEvents";
 
