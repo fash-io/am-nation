@@ -19,7 +19,7 @@ const EditEventPage = () => {
     link_name: "",
     country: "",
     curr: "",
-    artistId: [] // Initialize as an empty array
+    artistId: [], // Initialize as an empty array
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -43,14 +43,14 @@ const EditEventPage = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleArtistIdChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
-      artistId: e.target.value.split(",").map(id => id.trim())
+      artistId: e.target.value.split(",").map((id) => id.trim()),
     }));
   };
 
@@ -59,7 +59,7 @@ const EditEventPage = () => {
     try {
       await updateEvent(id, formData); // Update event details
       setSuccessMessage("Event updated successfully!");
-      setTimeout(() => navigate(`/events/${id}`), 2000); // Redirect to event page after a short delay
+      setTimeout(() => navigate(`/`), 2000); // Redirect to event page after a short delay
     } catch (error) {
       setErrorMessage("Failed to update event. Please try again.");
       console.error("Error updating event:", error);
@@ -73,11 +73,15 @@ const EditEventPage = () => {
       <h2 className="text-2xl font-semibold text-white mb-6">Edit Event</h2>
 
       {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-      {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
+      {successMessage && (
+        <p className="text-green-500 mb-4">{successMessage}</p>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-white mb-1">Event Name</label>
+          <label htmlFor="name" className="block text-white mb-1">
+            Event Name
+          </label>
           <input
             type="text"
             id="name"
@@ -89,7 +93,9 @@ const EditEventPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="date" className="block text-white mb-1">Date</label>
+          <label htmlFor="date" className="block text-white mb-1">
+            Date
+          </label>
           <input
             type="date"
             id="date"
@@ -101,7 +107,9 @@ const EditEventPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="location" className="block text-white mb-1">Location</label>
+          <label htmlFor="location" className="block text-white mb-1">
+            Location
+          </label>
           <input
             type="text"
             id="location"
@@ -113,7 +121,9 @@ const EditEventPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="organizers" className="block text-white mb-1">Organizers</label>
+          <label htmlFor="organizers" className="block text-white mb-1">
+            Organizers
+          </label>
           <input
             type="text"
             id="organizers"
@@ -125,7 +135,9 @@ const EditEventPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="hero_img" className="block text-white mb-1">Hero Image URL</label>
+          <label htmlFor="hero_img" className="block text-white mb-1">
+            Hero Image URL
+          </label>
           <input
             type="url"
             id="hero_img"
@@ -136,7 +148,9 @@ const EditEventPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="top_img" className="block text-white mb-1">Top Image URL</label>
+          <label htmlFor="top_img" className="block text-white mb-1">
+            Top Image URL
+          </label>
           <input
             type="url"
             id="top_img"
@@ -147,7 +161,9 @@ const EditEventPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="main_img" className="block text-white mb-1">Main Image URL</label>
+          <label htmlFor="main_img" className="block text-white mb-1">
+            Main Image URL
+          </label>
           <input
             type="url"
             id="main_img"
@@ -158,7 +174,9 @@ const EditEventPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="link_name" className="block text-white mb-1">Event Link</label>
+          <label htmlFor="link_name" className="block text-white mb-1">
+            Event Link
+          </label>
           <input
             type="url"
             id="link_name"
@@ -170,7 +188,9 @@ const EditEventPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="country" className="block text-white mb-1">Country</label>
+          <label htmlFor="country" className="block text-white mb-1">
+            Country
+          </label>
           <input
             type="text"
             id="country"
@@ -181,7 +201,9 @@ const EditEventPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="curr" className="block text-white mb-1">Currency</label>
+          <label htmlFor="curr" className="block text-white mb-1">
+            Currency
+          </label>
           <input
             type="text"
             id="curr"
@@ -192,7 +214,9 @@ const EditEventPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="artistId" className="block text-white mb-1">Artist IDs (comma separated)</label>
+          <label htmlFor="artistId" className="block text-white mb-1">
+            Artist IDs (comma separated)
+          </label>
           <input
             type="text"
             id="artistId"

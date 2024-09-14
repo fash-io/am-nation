@@ -360,15 +360,3 @@ export const jumbo = {
   jumboTitle: "Welcome to Your Next Great Adventure",
   jumboBtn: "BOOK NOW",
 };
-
-export let users = [
-  { email: 'favourfasi46@gmail.com', password: 'Favfasip1@', uName: 'Fash', },
-  { email: 'david@gmail.com', password: 'Favfasip1@', uName: 'Dave' },
-];
-export let show_org = [
-  {email: "", password: "", acc_details: "", event_created: [],}
-]
-
-let org_uid = "........./21";
-let atd_uid = "........./11";
-let adm_uid = "........./01";

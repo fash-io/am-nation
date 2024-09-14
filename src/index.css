@@ -94,10 +94,7 @@ body{background-color: rgba(var(--black)); transition: all 50ms ease-in; text-de
 #Reviews .card:hover img{transform: translateY(0px);}
 .jumbo{
   height: 100vh;
-  background-image: url(img/other-concerts-tickets.avif);
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
+  position: relative;
   margin-top: 200px !important;
 }
 @media screen and (max-width :771px) {

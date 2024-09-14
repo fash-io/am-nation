@@ -120,7 +120,7 @@ function App() {
         {level === 2 && (
           <Route path="/">
             <Route index element={<ViewEvents user={user} />} />
-            <Route path="/addEvent" element={<AddEvent user={user} />} />
+            <Route path="/add-event" element={<AddEvent user={user} />} />
             <Route path="/event/:id" element={<EditEventPage />} />
           </Route>
         )}

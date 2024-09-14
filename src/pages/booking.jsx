@@ -1,4 +1,4 @@
-import {Carousel} from "../components";
+import { Carousel } from "../components";
 import { events } from "../constants";
 
 export default function Booking() {
@@ -88,7 +88,10 @@ export default function Booking() {
                       value="table"
                       className="form-radio text-primary"
                     />
-                    <label htmlFor="inlineRadio1" className="ml-2 text-gray-700">
+                    <label
+                      htmlFor="inlineRadio1"
+                      className="ml-2 text-gray-700"
+                    >
                       TABLE
                     </label>
                   </div>
@@ -100,7 +103,10 @@ export default function Booking() {
                       value="v-vip"
                       className="form-radio text-primary"
                     />
-                    <label htmlFor="inlineRadio2" className="ml-2 text-gray-700">
+                    <label
+                      htmlFor="inlineRadio2"
+                      className="ml-2 text-gray-700"
+                    >
                       V-VIP
                     </label>
                   </div>
@@ -112,7 +118,10 @@ export default function Booking() {
                       value="vip"
                       className="form-radio text-primary"
                     />
-                    <label htmlFor="inlineRadio3" className="ml-2 text-gray-700">
+                    <label
+                      htmlFor="inlineRadio3"
+                      className="ml-2 text-gray-700"
+                    >
                       VIP
                     </label>
                   </div>
@@ -124,7 +133,10 @@ export default function Booking() {
                       value="regular"
                       className="form-radio text-primary"
                     />
-                    <label htmlFor="inlineRadio4" className="ml-2 text-gray-700">
+                    <label
+                      htmlFor="inlineRadio4"
+                      className="ml-2 text-gray-700"
+                    >
                       Regular
                     </label>
                   </div>
@@ -139,7 +151,10 @@ export default function Booking() {
                       value="mastercard"
                       className="form-radio text-primary"
                     />
-                    <label htmlFor="inlineRadio5" className="ml-2 text-gray-700">
+                    <label
+                      htmlFor="inlineRadio5"
+                      className="ml-2 text-gray-700"
+                    >
                       MasterCard
                     </label>
                   </div>
@@ -151,7 +166,10 @@ export default function Booking() {
                       value="visa"
                       className="form-radio text-primary"
                     />
-                    <label htmlFor="inlineRadio6" className="ml-2 text-gray-700">
+                    <label
+                      htmlFor="inlineRadio6"
+                      className="ml-2 text-gray-700"
+                    >
                       VISA
                     </label>
                   </div>
@@ -163,7 +181,10 @@ export default function Booking() {
                       value="bank-transfer"
                       className="form-radio text-primary"
                     />
-                    <label htmlFor="inlineRadio7" className="ml-2 text-gray-700">
+                    <label
+                      htmlFor="inlineRadio7"
+                      className="ml-2 text-gray-700"
+                    >
                       Bank Transfer
                     </label>
                   </div>
@@ -175,7 +196,10 @@ export default function Booking() {
                       value="bitcoin"
                       className="form-radio text-primary"
                     />
-                    <label htmlFor="inlineRadio8" className="ml-2 text-gray-700">
+                    <label
+                      htmlFor="inlineRadio8"
+                      className="ml-2 text-gray-700"
+                    >
                       BITCOIN
                     </label>
                   </div>
