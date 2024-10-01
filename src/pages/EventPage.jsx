@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { events, artists } from "../constants";
 import SectionWrapper from "../components/SectionWrapper";
-import { CountdownTimer, TicketSelector } from "../utils/eventutil";
+import { CountdownTimer, TicketSelector } from "../utils/EventUtil.jsx";
 
 const EventPage = () => {
   const [ended, setEnded] = useState(false);
