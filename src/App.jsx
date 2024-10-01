@@ -22,21 +22,20 @@ function App() {
   const initialMode = JSON.parse(localStorage.getItem("darkMode")) || false;
   const [darkMode, setDarkMode] = useState(initialMode);
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // For showing loading spinner
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [level, setLevel] = useState(null);
+  const [level, setLevel] = useState(1);
 
-  // Monitor authentication state
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user_) => {
       setUser(user_ || null);
-      setLoading(false); // Stop loading once user state is determined
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  // Fetch user authorization level
   useEffect(() => {
     if (user) {
       const getUserAuthorization = async () => {
@@ -57,7 +56,6 @@ function App() {
     }
   }, [user]);
 
-  // Handle dark mode toggling
   useEffect(() => {
     if (darkMode) {
       document
@@ -143,8 +141,7 @@ function App() {
             <Login darkMode={darkMode} handleSetDarkMode={handleSetDarkMode} />
           }
         />
-
-        {/* Catch-all route for 404 errors */}
+        
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>
