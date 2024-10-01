@@ -19,7 +19,7 @@ const getStarClasses = (rating, maxStars) => {
   return starClasses;
 };
 
-export default function Reviews() {
+const Reviews = () => {
   return (
     <SectionWrapper id={"Reviews"} title={"Reviews"} type={"2"} lead={"Hear what our fans have to say about their experiences at our events."}>
       <div className="row g-5 text-center mt-4">
@@ -44,3 +44,4 @@ export default function Reviews() {
     </SectionWrapper>
   );
 }
+export default Reviews;

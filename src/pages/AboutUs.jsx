@@ -1,4 +1,4 @@
-import { SectionWrapper } from "../components";
+import SectionWrapper from "../components/SectionWrapper";
 
 const AboutUs = () => {
   return (

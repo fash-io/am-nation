@@ -1,4 +1,4 @@
-export default function Newsletter() {
+const Newsletter =() => {
   return (
     <div className="container mx-auto my-8 px-4">
       <div className="text-center">
@@ -25,3 +25,4 @@ export default function Newsletter() {
     </div>
   );
 }
+export default Newsletter

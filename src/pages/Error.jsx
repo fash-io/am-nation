@@ -1,7 +1,6 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Error() {
+const Error = () => {
   const navigate = useNavigate(); // Hook for navigation in React Router v6
 
   return (
@@ -23,3 +22,4 @@ export default function Error() {
     </main>
   );
 }
+export default Error;

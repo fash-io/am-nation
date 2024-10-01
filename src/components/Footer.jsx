@@ -2,7 +2,7 @@ import { navLinks, navIcons } from "../constants";
 import { Link } from "react-router-dom";
 import Newsletter from "./Newsletter";
 
-export default function Footer() {
+const Footer = () => {
   return (<>
     <Newsletter/>
     <footer className="py-5 mt-5 bg-dark text-light px-5">
@@ -52,3 +52,4 @@ export default function Footer() {
     </>
   );
 }
+export default Footer;

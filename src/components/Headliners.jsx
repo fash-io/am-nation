@@ -1,7 +1,8 @@
 import { artists } from "../constants"
 import SectionWrapper from "./SectionWrapper";
 import { Link } from "react-router-dom";
-export default function Headliners() {
+
+const Headliners = () => {
   console.log();
   return (
     <SectionWrapper id={"case-stud"} title={"Headliners"} type={"1"}>
@@ -25,3 +26,4 @@ export default function Headliners() {
     </SectionWrapper>
   )
 }
+export default Headliners;

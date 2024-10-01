@@ -1,7 +1,7 @@
-import { Carousel } from "../components";
+import Carousel from "../components/Carousel";
 import { events } from "../constants";
 
-export default function Booking() {
+const Booking = () => {
   return (
     <>
       <Carousel carouselItems={events} />
@@ -221,3 +221,4 @@ export default function Booking() {
     </>
   );
 }
+export default Booking;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getEventById, updateEvent } from "../utils/firebase"; // Import functions for fetching and updating event
-import { SectionWrapper } from "../components";
+import { getEventById, updateEvent } from "../utils/firebase";
 
 const EditEventPage = () => {
   const { id } = useParams(); // Get event ID from URL

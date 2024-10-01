@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { useLocation, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { events, artists } from "../constants";
-import { SectionWrapper } from "../components";
+import SectionWrapper from "../components/SectionWrapper";
 
 // CountdownTimer Component
 const CountdownTimer = ({ timeRemaining }) => (
@@ -51,7 +51,7 @@ const TicketSelector = ({ tickets, onTicketChange, ticketCounts }) => (
   </>
 );
 
-const EventPage = () => {
+const Event = () => {
   const [ended, setEnded] = useState(false);
   const [ticketCounts, setTicketCounts] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
@@ -65,6 +65,7 @@ const EventPage = () => {
   const location = useLocation();
   const eventName = location.pathname;
   const event = events.find((e) => e.link_name === eventName);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (event) {
@@ -309,4 +310,4 @@ const EventPage = () => {
   );
 }
 
-export default EventPage;
+export default Event;

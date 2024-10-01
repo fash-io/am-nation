@@ -1,6 +1,6 @@
 import { jumbo } from "../constants";
 
-export default function Jumbotron() {
+const Jumbotron = () => {
   return (
     <div className="relative w-full h-[600px] overflow-hidden mt-20">
       {/* Background image fixed only within the Jumbotron */}
@@ -26,3 +26,4 @@ export default function Jumbotron() {
     </div>
   );
 }
+export default Jumbotron

@@ -1,8 +1,12 @@
-import React from "react";
-import {Events, FeaturedArtist, Headliners} from "../components"
-import {CarouselHero,  Jumbotron, Reviews, About} from "../sections"
+import Headliners from "../components/Headliners";
+import Events from "../components/Events";
+import FeaturedArtist from "../components/FeaturedArtist";
+import Jumbotron from '../sections/Jumbotron';
+import Reviews from "../sections/Reviews";
+import About from "../sections/About";
+import CarouselHero from "../sections/CarouselHero";
 
-function HomePage() {
+const Home = () => {
   return (
     <>
       <CarouselHero />
@@ -23,4 +27,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Home;

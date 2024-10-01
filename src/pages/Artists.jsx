@@ -1,5 +1,4 @@
-import React from "react";
-import { FeaturedArtist } from "../components";
+import FeaturedArtist from "../components/FeaturedArtist";
 
 const Artists = () => {
   return (

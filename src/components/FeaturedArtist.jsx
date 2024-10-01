@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { artists } from "../constants";
 import SectionWrapper from "./SectionWrapper";
 
-export default function FeaturedArtist(props) {
+const FeaturedArtist = (props) => {
   const { id, title, type, more, full } = props;
 
   const artistList = full
@@ -29,4 +29,6 @@ export default function FeaturedArtist(props) {
       </div>
     </SectionWrapper>
   );
-}
+};
+
+export default FeaturedArtist;

@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import ScrollToTop from "./ScrollToTop";
 import { logout } from "../utils/firebase";
 
-export default function Navbar(props) {
+const Navbar = (props) => {
   const { handleSetDarkMode, darkMode, isLogined } = props;
   // const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -148,3 +148,4 @@ export default function Navbar(props) {
     </>
   );
 }
+export default Navbar;

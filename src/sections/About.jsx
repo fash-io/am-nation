@@ -1,6 +1,6 @@
 import SectionWrapper from "../components/SectionWrapper";
 
-export default function About() {
+const About = () => {
   return (
       <SectionWrapper id={"about"} title={"About Us"} type={"2"}>
         <div className="row gy-4">
@@ -23,3 +23,4 @@ export default function About() {
  
   )
 }
+export default About;

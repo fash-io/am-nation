@@ -1,6 +1,7 @@
 import Carousel from "../components/Carousel";
 import { carouselItems } from "../constants";
 
-export default function CarouselHero() {
+const CarouselHero = () => {
   return <Carousel carouselItems={carouselItems} btn={true} />;
 }
+export default CarouselHero

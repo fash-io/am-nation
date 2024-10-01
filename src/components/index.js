@@ -1,7 +1,0 @@
-export { default as FeaturedArtist } from './Artists'
-export { default as Carousel } from './Carousel'
-export { default as Events } from './Events'
-export { default as Footer } from './Footer'
-export { default as Navbar } from './Navbar'
-export { default as Headliners } from './Headliners'
-export { default as SectionWrapper } from './SectionWrapper'

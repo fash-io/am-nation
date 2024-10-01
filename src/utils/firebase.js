@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   setPersistence,
-  browserLocalPersistence
+  browserLocalPersistence,
 } from "firebase/auth";
 import {
   addDoc,
@@ -15,12 +15,13 @@ import {
   getDoc,
   getFirestore,
   setDoc,
-  getDocs, 
-  where, 
+  getDocs,
+  where,
   query,
-  updateDoc
+  updateDoc,
 } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -40,9 +41,21 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 // Functions
-const signup = async (name, email, password, type) => {
+const signup = async (
+  name,
+  email,
+  password,
+  type,
+  setSuccess,
+  setError,
+  navigate
+) => {
   try {
-    const response = await createUserWithEmailAndPassword(auth, email, password);
+    const response = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     const user = response.user;
     const userDocRef = doc(db, "users", user.uid);
     await setDoc(userDocRef, {
@@ -52,9 +65,10 @@ const signup = async (name, email, password, type) => {
       authProvider: "local",
       email,
     });
-    window.location = "/";
+    setSuccess("Signup successful! Redirecting...");
+    navigate("/");
   } catch (err) {
-    handleAuthError(err);
+    setError(handleAuthError(err));
   }
 };
 
@@ -64,12 +78,25 @@ const handleAuthError = (err) => {
       return "Incorrect password, please try again.";
     case "auth/user-not-found":
       return "No user found with this email.";
+    case "auth/invalid-credential":
+      return "Invalid credentials. Please try again.";
+    case "auth/email-already-in-use":
+      return "Email already in use. Please sign in.";
+    case "auth/weak-password":
+      return "Password must be at least 6 characters long.";
+    case "auth/too-many-requests":
+      return "Too many requests. Please try again later.";
+    case "auth/popup-closed-by-user":
+      return "Popup closed by user. Please try again.";
+    case "auth/popup-blocked":
+      return "Popup blocked. Please enable popups in your browser settings.";
+
     default:
       return "An error occurred. Please try again later.";
   }
 };
 
-const login = async (email, password) => {
+const login = async (email, password, setSuccess, setError, navigate) => {
   try {
     await setPersistence(auth, browserLocalPersistence);
     const response = await signInWithEmailAndPassword(auth, email, password);
@@ -83,17 +110,22 @@ const login = async (email, password) => {
 
       if (userType === "1") {
         console.log("Access granted for user type 1");
-        window.location = "/";
+        setSuccess("Login successful! Redirecting...");
+        navigate("/");
       } else if (userType === "2") {
         console.log("Access granted for user type 2");
-        window.location = "/";
+        setSuccess("Login successful! Redirecting...");
+        navigate("/");
       } else {
+        setError("Invalid user type");
         throw new Error("Invalid user type");
       }
     } else {
+      setError("User document not found");
       throw new Error("User document not found");
     }
   } catch (err) {
+    setError(handleAuthError(err));
     console.error(err);
     handleAuthError(err);
   }
@@ -151,17 +183,17 @@ const getEventsByOrganizer = async (organizerId) => {
     const eventsRef = collection(db, "events");
     const q = query(eventsRef, where("organizersId", "==", organizerId));
     const querySnapshot = await getDocs(q);
-    
+
     if (querySnapshot.empty) {
       console.log("No matching documents.");
       return [];
     }
 
-    const events = querySnapshot.docs.map(doc => ({
+    const events = querySnapshot.docs.map((doc) => ({
       id: doc.id,
-      ...doc.data()
+      ...doc.data(),
     }));
-    
+
     console.log("Events found:", events);
     return events;
   } catch (err) {
@@ -173,7 +205,7 @@ const getEventsByOrganizer = async (organizerId) => {
 // Function to fetch an event by ID
 export const getEventById = async (eventId) => {
   try {
-    const eventRef = doc(db, 'events', eventId); // Reference to the event document
+    const eventRef = doc(db, "events", eventId); // Reference to the event document
     const docSnap = await getDoc(eventRef); // Fetch the document
     if (docSnap.exists()) {
       return { id: docSnap.id, ...docSnap.data() }; // Return event data including the ID
@@ -189,7 +221,7 @@ export const getEventById = async (eventId) => {
 // Function to update an event
 export const updateEvent = async (eventId, updatedData) => {
   try {
-    const eventRef = doc(db, 'events', eventId); // Reference to the event document
+    const eventRef = doc(db, "events", eventId); // Reference to the event document
     await updateDoc(eventRef, updatedData); // Update the document with new data
   } catch (error) {
     console.error("Error updating event:", error);
@@ -208,4 +240,15 @@ const changeUserAuthorization = async (user) => {
 };
 
 // Export all functions and objects
-export { auth, db, storage, signup, login, logout, handleAddEvents, uploadImage, getEventsByOrganizer, changeUserAuthorization };
+export {
+  auth,
+  db,
+  storage,
+  signup,
+  login,
+  logout,
+  handleAddEvents,
+  uploadImage,
+  getEventsByOrganizer,
+  changeUserAuthorization,
+};

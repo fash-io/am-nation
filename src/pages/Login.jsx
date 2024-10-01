@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { login, signup } from "../utils/firebase"; // Firebase functions
 
-export default function Login(props) {
-  const { darkMode, handleSetDarkMode, setIsLogined } = props;
+const Login = (props) => {
+  const { darkMode, handleSetDarkMode } = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,14 +11,17 @@ export default function Login(props) {
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false); // New loading state
   const [type, setType] = useState(1);
   const location = useLocation();
   const isLogin = location.pathname === "/login";
+  const navigate = useNavigate(); // Using useNavigate for routing
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
+    setLoading(true); // Set loading to true
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex =
@@ -27,6 +30,7 @@ export default function Login(props) {
     // Validation
     if (!emailRegex.test(email)) {
       setError("Invalid email");
+      setLoading(false); // Stop loading
       return;
     }
     if (!isLogin) {
@@ -34,24 +38,22 @@ export default function Login(props) {
         setError(
           "Password must be at least 8 characters long, contain an uppercase letter, and a special character."
         );
+        setLoading(false); // Stop loading
         return;
       }
       if (password !== confirmPassword) {
         setError("Passwords do not match");
+        setLoading(false); // Stop loading
         return;
       }
     }
 
     try {
       if (isLogin) {
-        await login(email, password);
-        window.location = "/";
-        setSuccess("Logged in successfully!");
+        await login(email, password, setSuccess, setError, navigate);
       } else {
-        await signup(username, email, password, type);
-        setSuccess("Account created successfully!");
+        await signup(username, email, password, type, setSuccess, setError, navigate);
       }
-      // Clear form on success
       setEmail("");
       setPassword("");
       setConfirmPassword("");
@@ -59,6 +61,7 @@ export default function Login(props) {
     } catch (err) {
       setError(err.message);
     }
+    setLoading(false);
   };
 
   return (
@@ -190,9 +193,10 @@ export default function Login(props) {
 
               <button
                 type="submit"
-                className="w-full font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 dark:bg-primary-700"
+                disabled={loading} // Disable button when loading
+                className={`w-full font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 dark:bg-primary-700 ${loading && "opacity-50 cursor-not-allowed"}`}
               >
-                {isLogin ? "Sign in" : "Sign up"}
+                {loading ? "Loading..." : isLogin ? "Sign in" : "Sign up"}
               </button>
 
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
@@ -212,4 +216,6 @@ export default function Login(props) {
       </div>
     </section>
   );
-}
+};
+
+export default Login;

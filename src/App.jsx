@@ -1,30 +1,28 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import {
-  Home,
-  Events,
-  Event,
-  Artists,
-  Error,
-  AboutUs,
-  Login,
-  AddEvent,
-  ViewEvents,
-  Booking
-} from "./pages";
+
 import { useState, useEffect } from "react";
 import MainLayout from "./utils/MainLayout";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./utils/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import EditEventPage from "./pages/EditEvent";
-
+import Home from "./pages/Home";
+import EventsPage from "./pages/EventsPage";
+import Artists from "./pages/Artists";
+import Booking from "./pages/Booking";
+import AboutUs from "./pages/AboutUs";
+import Event from "./pages/Event";
+import MyEventsPage from "./pages/MyEventsPage";
+import AddEvent from "./pages/AddEvent";
+import EditEventPage from "./pages/EditEventPage";
+import Login from "./pages/Login";
+import Error from "./pages/Error";
 function App() {
   const initialMode = JSON.parse(localStorage.getItem("darkMode")) || false;
   const [darkMode, setDarkMode] = useState(initialMode);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState(0);
 
 
   useEffect(() => {
@@ -49,7 +47,6 @@ function App() {
           }
         } catch (err) {
           setError("Failed to fetch user data.");
-          console.log(err);
         }
       };
       getUserAuthorization();
@@ -108,7 +105,7 @@ function App() {
             }
           >
             <Route index element={<Home />} />
-            <Route path="/events" element={<Events />} />
+            <Route path="/events" element={<EventsPage />} />
             <Route path="/artists" element={<Artists />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="/about" element={<AboutUs />} />
@@ -117,7 +114,7 @@ function App() {
         )}
         {level === 2 && (
           <Route path="/">
-            <Route index element={<ViewEvents user={user} />} />
+            <Route index element={<MyEventsPage user={user} />} />
             <Route path="/add-event" element={<AddEvent user={user} />} />
             <Route path="/event/:id" element={<EditEventPage />} />
           </Route>
