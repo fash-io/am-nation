@@ -1,7 +1,7 @@
 export { default as Home } from "./Home";
 export { default as AboutUs } from "./AboutUs";
 export { default as Error } from "./Error";
-export { default as Event } from "./Event";
+export { default as EventPage } from "./Event";
 export { default as Events } from "./Events";
 export { default as Login } from "./Login";
 export { default as Artists } from "./Artists";

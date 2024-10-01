@@ -51,7 +51,7 @@ const TicketSelector = ({ tickets, onTicketChange, ticketCounts }) => (
   </>
 );
 
-export default function Event() {
+const EventPage = () => {
   const [ended, setEnded] = useState(false);
   const [ticketCounts, setTicketCounts] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
@@ -308,3 +308,5 @@ export default function Event() {
     </>
   );
 }
+
+export default EventPage;
