@@ -8,7 +8,7 @@ import { doc, getDoc } from "firebase/firestore";
 import Home from "./pages/Home";
 import EventsPage from "./pages/EventsPage";
 import Artists from "./pages/Artists";
-import Booking from "./pages/Booking";
+import Booking from "./pages/Booking.jsx";
 import AboutUs from "./pages/AboutUs";
 import Event from "./pages/Event";
 import MyEventsPage from "./pages/MyEventsPage";
