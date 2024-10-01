@@ -3,7 +3,6 @@ export const navLinks = [
   { href: "/events", label: "Events" },
   { href: "/artists", label: "Artists" },
   { href: "/about", label: "About US" },
-  { href: "/booking", label: "Book Now" },
 ];
 export const navIcons = [
   { class: "bi-twitter", label: "twitter", href: "#" },
