@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { events, artists } from "../constants";
 import SectionWrapper from "../components/SectionWrapper";
 import { CountdownTimer, TicketSelector } from "../utils/eventutil";
 
-// CountdownTimer Component
-
-const Event = () => {
+const EventPage = () => {
   const [ended, setEnded] = useState(false);
   const [ticketCounts, setTicketCounts] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
@@ -73,21 +71,21 @@ const Event = () => {
   if (!event) {
     return (
       <main className="flex items-center justify-center min-h-screen">
-      <div className=" p-8 rounded-lg about2-card text-center">
-        <h1 className="text-6xl font-bold text-red-600">Not Found</h1>
-        <p className="text-lg text-gr5ay-00 mt-4">
-          Oops! The Event you're looking for doesn't exist or has ended. You can return to the
-          homepage or try searching for what you need.
-        </p>
-        <button
-          className="mt-6 bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onClick={() => navigate("/")}
-          aria-label="Go back to homepage"
-        >
-          Go Back Home
-        </button>
-      </div>
-    </main>
+        <div className=" p-8 rounded-lg about2-card text-center">
+          <h1 className="text-6xl font-bold text-red-600">Not Found</h1>
+          <p className="text-lg text-gr5ay-00 mt-4">
+            Oops! The Event you're looking for doesn't exist or has ended. You
+            can return to the homepage or try searching for what you need.
+          </p>
+          <button
+            className="mt-6 bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onClick={() => navigate("/")}
+            aria-label="Go back to homepage"
+          >
+            Go Back Home
+          </button>
+        </div>
+      </main>
     );
   }
 
@@ -263,6 +261,6 @@ const Event = () => {
       </SectionWrapper>
     </>
   );
-}
+};
 
-export default Event;
+export default EventPage;

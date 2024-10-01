@@ -9,7 +9,7 @@ import Home from "./pages/Home";
 import EventsPage from "./pages/EventsPage";
 import Artists from "./pages/Artists";
 import AboutUs from "./pages/AboutUs";
-import Event from "./pages/Event";
+import EventPage from "./pages/EventPage";
 import MyEventsPage from "./pages/MyEventsPage";
 import AddEvent from "./pages/AddEvent";
 import EditEventPage from "./pages/EditEventPage";
@@ -107,7 +107,7 @@ const App = () => {
             <Route path="/events" element={<EventsPage />} />
             <Route path="/artists" element={<Artists />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/event/:id" element={<Event />} />
+            <Route path="/event/:id" element={<EventPage />} />
           </Route>
         )}
         {level === 2 && (
