@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 import MainLayout from "./utils/MainLayout";
@@ -15,7 +15,8 @@ import AddEvent from "./pages/AddEvent";
 import EditEventPage from "./pages/EditEventPage";
 import Login from "./pages/Login";
 import Error from "./pages/Error";
-function App() {
+
+const App = () => {
   const initialMode = JSON.parse(localStorage.getItem("darkMode")) || false;
   const [darkMode, setDarkMode] = useState(initialMode);
   const [user, setUser] = useState(null);
@@ -90,7 +91,6 @@ function App() {
   }
 
   return (
-    <Router>
       <Routes>
         {level === 1 && (
           <Route
@@ -139,7 +139,6 @@ function App() {
         
         <Route path="*" element={<Error />} />
       </Routes>
-    </Router>
   );
 }
 
